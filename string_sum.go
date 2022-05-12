@@ -29,7 +29,7 @@ func StringSum(input string) (string, error) {
 	fmt.Println("--------------------------")
 	input = sts.ReplaceAll(input, " ", "")
 	if len(input) == 0 {
-		return "", errorEmptyInput
+		return "", fmt.Errorf("invalid input: %v", errorEmptyInput)
 	}
 	var sum = 0
 	fmt.Println(input)
@@ -49,7 +49,7 @@ func StringSum(input string) (string, error) {
 			return "", fmt.Errorf("invalid input: %v", e2)
 		}
 	} else {
-		return "", errorNotTwoOperands
+		return "", fmt.Errorf("invalid input: %v", errorNotTwoOperands)
 	}
 	return sc.Itoa(sum), nil
 }
