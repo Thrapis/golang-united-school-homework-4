@@ -15,7 +15,9 @@ var (
 	errorNotTwoOperands = errors.New("expecting two operands, but received more or less")
 )
 
-// Implement a function that computes the sum of two int numbers written as a string
+const formatter = "invalid input: %w"
+
+	// Implement a function that computes the sum of two int numbers written as a string
 // For example, having an input string "3+5", it should return output string "8" and nil error
 // Consider cases, when operands are negative ("-3+5" or "-3-5") and when input string contains whitespace (" 3 + 5 ")
 //
@@ -29,7 +31,7 @@ func StringSum(input string) (string, error) {
 	fmt.Println("--------------------------")
 	input = sts.ReplaceAll(input, " ", "")
 	if len(input) == 0 {
-		return "", fmt.Errorf("invalid input: %v", errorEmptyInput)
+		return "", fmt.Errorf(formatter, errorEmptyInput)
 	}
 	var sum = 0
 	fmt.Println(input)
@@ -41,15 +43,15 @@ func StringSum(input string) (string, error) {
 		if arg1, e1 := sc.Atoi(split[0]); e1 == nil {
 			sum += arg1
 		} else {
-			return "", fmt.Errorf("invalid input: %v", e1)
+			return "", fmt.Errorf(formatter, e1)
 		}
 		if arg2, e2 := sc.Atoi(split[1]); e2 == nil {
 			sum += arg2
 		} else {
-			return "", fmt.Errorf("invalid input: %v", e2)
+			return "", fmt.Errorf(formatter, e2)
 		}
 	} else {
-		return "", fmt.Errorf("invalid input: %v", errorNotTwoOperands)
+		return "", fmt.Errorf(formatter, errorNotTwoOperands)
 	}
 	return sc.Itoa(sum), nil
 }
